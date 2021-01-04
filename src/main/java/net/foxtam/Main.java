@@ -1,19 +1,27 @@
 package net.foxtam;
 
-import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        String inputFileName = getArg("-in", args);
+        String outputFileName = getArg("-out", args);
 
-        double a = scanner.nextDouble();
-        double b = scanner.nextDouble();
-        double c = scanner.nextDouble();
-        double d = scanner.nextDouble();
-        double e = scanner.nextDouble();
-        double f = scanner.nextDouble();
+        File inputFile = new File(inputFileName);
+        File outputFile = new File(outputFileName);
 
-        Solution result = LinearSolver.solve(a, b, c, d, e, f);
-        System.out.println(result.x + " " + result.y);
+        double[][] linearEquations = FileIO.readMatrixFromFile(inputFile);
+
+        double[] result = LinearEquations.solve(linearEquations);
+
+        FileIO.writeArrayToFile(outputFile, result);
+    }
+
+    private static String getArg(String key, String[] args) {
+        int index = Arrays.asList(args).indexOf(key);
+        assert index >= 0;
+        return args[index + 1];
     }
 }
