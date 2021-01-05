@@ -31,7 +31,7 @@ public class LinearEquations {
     }
 
     private void solve() {
-        // TODO: упорядочить строки так что бы в главной диоганали не было нулей, порверить нерешаемость
+        // TODO проверить отсутствие решений
         nullLowMatrix();
         nullHighMatrix();
         transformToIdentityMatrix();
