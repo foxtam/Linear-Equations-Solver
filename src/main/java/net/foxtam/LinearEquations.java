@@ -50,8 +50,4 @@ public class LinearEquations {
             equations[row][i] -= multiplier * equations[column][i];
         }
     }
-
-    private static void divideRowBy(double[] equation, double value) {
-
-    }
 }
