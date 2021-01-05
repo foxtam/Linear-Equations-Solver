@@ -1,6 +1,9 @@
 package net.foxtam;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class FileIO {
@@ -24,10 +27,10 @@ public class FileIO {
         return numbers;
     }
 
-    static void writeArrayToFile(File file, double[] array) throws IOException {
+    static void writeArrayToFile(File file, ShellDoubleArray array) throws IOException {
         try (PrintWriter fileWriter = new PrintWriter(file)) {
-            for (double n : array) {
-                fileWriter.println(n);
+            for (int i = 0; i < array.size(); i++) {
+                fileWriter.println(array.get(i));
             }
         }
     }

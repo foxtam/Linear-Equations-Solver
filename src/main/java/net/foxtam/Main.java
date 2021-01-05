@@ -15,7 +15,7 @@ public class Main {
         double[][] coefficients = FileIO.readMatrixFromFile(inputFile);
 
         LinearEquations equations = LinearEquations.fromMatrix(coefficients);
-        double[] result = equations.getSolution();
+        ShellDoubleArray result = equations.getSolution();
 
         FileIO.writeArrayToFile(outputFile, result);
     }

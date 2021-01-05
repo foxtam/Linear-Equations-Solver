@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class LinearEquations {
 
     private final double[][] equations;
-    private double[] solution;
+    private ShellDoubleArray solution;
 
     private LinearEquations(double[][] equations) {
         this.equations = copyArray2D(equations);
@@ -23,11 +23,11 @@ public class LinearEquations {
         return new LinearEquations(equationCoefficients);
     }
 
-    public double[] getSolution() {
+    public ShellDoubleArray getSolution() {
         if (solution == null) {
             solve();
         }
-        return Arrays.copyOf(solution, solution.length);
+        return solution;
     }
 
     private void solve() {
@@ -68,7 +68,7 @@ public class LinearEquations {
         for (int i = 0; i < equations.length; i++) {
             result[i] = equations[i][equations[0].length - 1];
         }
-        solution = result;
+        solution = new ShellDoubleArray(result);
     }
 
     private void reduceRow(int column, int row) {
