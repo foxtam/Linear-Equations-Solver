@@ -12,9 +12,10 @@ public class Main {
         File inputFile = new File(inputFileName);
         File outputFile = new File(outputFileName);
 
-        double[][] linearEquations = FileIO.readMatrixFromFile(inputFile);
+        double[][] coefficients = FileIO.readMatrixFromFile(inputFile);
 
-        double[] result = LinearEquations.solve(linearEquations);
+        LinearEquations equations = LinearEquations.fromMatrix(coefficients);
+        double[] result = equations.getSolution();
 
         FileIO.writeArrayToFile(outputFile, result);
     }
