@@ -1,13 +1,13 @@
-package net.foxtam;
+package net.foxtam.linearequations;
 
 import java.util.Arrays;
 
-public class LinearEquations {
+public class LinearEquationsSystem {
 
     private final double[][] equations;
     private ShellDoubleArray solution;
 
-    private LinearEquations(double[][] equations) {
+    private LinearEquationsSystem(double[][] equations) {
         this.equations = copyArray2D(equations);
     }
 
@@ -19,8 +19,8 @@ public class LinearEquations {
         return copy;
     }
 
-    public static LinearEquations fromMatrix(double[][] equationCoefficients) {
-        return new LinearEquations(equationCoefficients);
+    public static LinearEquationsSystem fromMatrix(double[][] equationCoefficients) {
+        return new LinearEquationsSystem(equationCoefficients);
     }
 
     public ShellDoubleArray getSolution() {

@@ -1,5 +1,9 @@
 package net.foxtam;
 
+import net.foxtam.io.FileIO;
+import net.foxtam.linearequations.LinearEquationsSystem;
+import net.foxtam.linearequations.ShellDoubleArray;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -14,7 +18,7 @@ public class Main {
 
         double[][] coefficients = FileIO.readMatrixFromFile(inputFile);
 
-        LinearEquations equations = LinearEquations.fromMatrix(coefficients);
+        LinearEquationsSystem equations = LinearEquationsSystem.fromMatrix(coefficients);
         ShellDoubleArray result = equations.getSolution();
 
         FileIO.writeArrayToFile(outputFile, result);
