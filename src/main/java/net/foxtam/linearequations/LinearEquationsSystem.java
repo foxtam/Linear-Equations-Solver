@@ -73,7 +73,7 @@ public class LinearEquationsSystem {
 
     private void reduceRow(int column, int row) {
         double multiplier = equations[row][column] / equations[column][column];
-        for (int i = 0; i <= equations.length; i++) {
+        for (int i = 0; i < equations[0].length; i++) {
             equations[row][i] -= multiplier * equations[column][i];
         }
     }
