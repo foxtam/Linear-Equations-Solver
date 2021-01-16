@@ -1,6 +1,6 @@
 package net.foxtam.io;
 
-import net.foxtam.linearequations.ShellDoubleArray;
+import net.foxtam.linearequations.Solution;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,11 +29,9 @@ public class FileIO {
         return numbers;
     }
 
-    public static void writeArrayToFile(File file, ShellDoubleArray array) throws IOException {
+    public static void writeArrayToFile(File file, Solution solution) throws IOException {
         try (PrintWriter fileWriter = new PrintWriter(file)) {
-            for (int i = 0; i < array.size(); i++) {
-                fileWriter.println(array.get(i));
-            }
+            fileWriter.println(solution.toString());
         }
     }
 }

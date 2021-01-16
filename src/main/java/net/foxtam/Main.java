@@ -2,7 +2,7 @@ package net.foxtam;
 
 import net.foxtam.io.FileIO;
 import net.foxtam.linearequations.LinearEquationsSystem;
-import net.foxtam.linearequations.ShellDoubleArray;
+import net.foxtam.linearequations.Solution;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,14 +19,16 @@ public class Main {
         double[][] coefficients = FileIO.readMatrixFromFile(inputFile);
 
         LinearEquationsSystem equations = LinearEquationsSystem.fromArray(coefficients);
-        ShellDoubleArray result = equations.getSolution();
+        Solution result = equations.getSolution();
 
         FileIO.writeArrayToFile(outputFile, result);
     }
 
     private static String getArg(String key, String[] args) {
         int index = Arrays.asList(args).indexOf(key);
-        assert index >= 0;
+        if(index == -1) {
+            throw new IllegalArgumentException("Key not found");
+        }
         return args[index + 1];
     }
 }
