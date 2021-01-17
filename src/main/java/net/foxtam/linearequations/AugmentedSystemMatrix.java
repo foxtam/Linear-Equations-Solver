@@ -28,8 +28,8 @@ public class AugmentedSystemMatrix {
         }
     }
 
-    public int height() {
-        return matrix.length;
+    public int shortWidth() {
+        return fullWidth() - 1;
     }
 
     public FullRow viewRow(int rowIndex) {
@@ -38,10 +38,6 @@ public class AugmentedSystemMatrix {
 
     public double get(int rowIndex, int columnIndex) {
         return matrix[rowIndex][columnIndex];
-    }
-
-    public int shortWidth() {
-        return fullWidth() - 1;
     }
 
     public int fullWidth() {
@@ -61,11 +57,26 @@ public class AugmentedSystemMatrix {
     }
 
     public void swapRows(int rowA, int rowB) {
-        throw new UnsupportedOperationException();
+        double[] doubles = Arrays.copyOf(matrix[rowA], fullWidth());
+        System.arraycopy(matrix[rowB], 0, matrix[rowA], 0, fullWidth());
+        System.arraycopy(doubles, 0, matrix[rowB], 0, fullWidth());
     }
 
     public void swapColumns(int columnA, int columnB) {
-        throw new UnsupportedOperationException();
+        double[] doubles = new double[height()];
+        for (int i = 0; i < height(); i++) {
+            doubles[i] = matrix[i][columnA];
+        }
+        for (int i = 0; i < height(); i++) {
+            matrix[i][columnA] = matrix[i][columnB];
+        }
+        for (int i = 0; i < height(); i++) {
+            matrix[i][columnB] = doubles[i];
+        }
+    }
+
+    public int height() {
+        return matrix.length;
     }
 
     private abstract class Row {
@@ -78,10 +89,6 @@ public class AugmentedSystemMatrix {
 
         protected int getRowIndex() {
             return rowIndex;
-        }
-
-        public void addRow(Row row) {
-            addRow(row, 1.0);
         }
 
         public void addRow(Row row, double multiplier) {
@@ -123,15 +130,6 @@ public class AugmentedSystemMatrix {
             }
             return false;
         }
-
-        public boolean hasZero() {
-            for (int i = 0; i < size(); i++) {
-                if (DoubleUtil.isCloseToZero(get(i))) {
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 
     public class FullRow extends Row {
@@ -141,8 +139,7 @@ public class AugmentedSystemMatrix {
         }
 
         public boolean isBroken() {
-            return DoubleUtil.isCloseToZero(freeTerm()) && onlyCoefficients().hasNotZero()
-                    || !DoubleUtil.isCloseToZero(freeTerm()) && onlyCoefficients().onlyZeros();
+            return !DoubleUtil.isCloseToZero(freeTerm()) && onlyCoefficients().onlyZeros();
         }
 
         private double freeTerm() {
@@ -167,7 +164,7 @@ public class AugmentedSystemMatrix {
 
         public boolean onlyZeros() {
             for (int i = 0; i < size(); i++) {
-                if (!DoubleUtil.isCloseToZero(i)) return false;
+                if (!DoubleUtil.isCloseToZero(get(i))) return false;
             }
             return true;
         }
@@ -184,14 +181,6 @@ public class AugmentedSystemMatrix {
 
         public Column(int columnIndex) {
             this.columnIndex = columnIndex;
-        }
-
-        public int size() {
-            return matrix.length;
-        }
-
-        public void set(int rowIndex, double value) {
-            matrix[rowIndex][columnIndex] = value;
         }
 
         public double get(int rowIndex) {
