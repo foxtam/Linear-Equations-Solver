@@ -28,8 +28,8 @@ public class AugmentedSystemMatrix {
         }
     }
 
-    public int height() {
-        return matrix.length;
+    public int shortWidth() {
+        return fullWidth() - 1;
     }
 
     public FullRow viewRow(int rowIndex) {
@@ -38,10 +38,6 @@ public class AugmentedSystemMatrix {
 
     public double get(int rowIndex, int columnIndex) {
         return matrix[rowIndex][columnIndex];
-    }
-
-    public int shortWidth() {
-        return fullWidth() - 1;
     }
 
     public int fullWidth() {
