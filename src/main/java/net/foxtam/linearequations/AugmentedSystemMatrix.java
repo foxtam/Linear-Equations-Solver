@@ -95,10 +95,6 @@ public class AugmentedSystemMatrix {
             return rowIndex;
         }
 
-        public void addRow(Row row) {
-            addRow(row, 1.0);
-        }
-
         public void addRow(Row row, double multiplier) {
             if (size() != row.size()) {
                 throw new IllegalArgumentException("Строки не одинаковой длины");
@@ -133,15 +129,6 @@ public class AugmentedSystemMatrix {
         public boolean hasNotZero() {
             for (int i = 0; i < size(); i++) {
                 if (!DoubleUtil.isCloseToZero(get(i))) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public boolean hasZero() {
-            for (int i = 0; i < size(); i++) {
-                if (DoubleUtil.isCloseToZero(get(i))) {
                     return true;
                 }
             }
@@ -198,14 +185,6 @@ public class AugmentedSystemMatrix {
 
         public Column(int columnIndex) {
             this.columnIndex = columnIndex;
-        }
-
-        public int size() {
-            return matrix.length;
-        }
-
-        public void set(int rowIndex, double value) {
-            matrix[rowIndex][columnIndex] = value;
         }
 
         public double get(int rowIndex) {
