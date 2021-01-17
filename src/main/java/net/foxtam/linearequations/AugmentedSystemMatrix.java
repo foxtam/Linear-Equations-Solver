@@ -182,7 +182,7 @@ public class AugmentedSystemMatrix {
 
         public boolean onlyZeros() {
             for (int i = 0; i < size(); i++) {
-                if (!DoubleUtil.isCloseToZero(i)) return false;
+                if (!DoubleUtil.isCloseToZero(get(i))) return false;
             }
             return true;
         }
