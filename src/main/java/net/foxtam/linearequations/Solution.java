@@ -1,6 +1,7 @@
 package net.foxtam.linearequations;
 
 public class Solution {
+
     private final State state;
     private double[] coefficients;
 
@@ -48,6 +49,18 @@ public class Solution {
     }
 
     public enum State {
-        NO_SOLUTION, INFINITE_SOLUTIONS, ONE_SOLUTION
+        NO_SOLUTION("No solutions"),
+        INFINITE_SOLUTIONS("Infinitely many solutions"),
+        ONE_SOLUTION("Has one solution");
+
+        private final String message;
+
+        State(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
     }
 }
