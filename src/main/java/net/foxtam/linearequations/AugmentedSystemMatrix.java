@@ -156,8 +156,7 @@ public class AugmentedSystemMatrix {
         }
 
         public boolean isBroken() {
-            return DoubleUtil.isCloseToZero(freeTerm()) && onlyCoefficients().hasNotZero()
-                    || !DoubleUtil.isCloseToZero(freeTerm()) && onlyCoefficients().onlyZeros();
+            return !DoubleUtil.isCloseToZero(freeTerm()) && onlyCoefficients().onlyZeros();
         }
 
         private double freeTerm() {
