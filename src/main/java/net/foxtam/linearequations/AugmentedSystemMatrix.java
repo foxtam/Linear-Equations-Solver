@@ -61,11 +61,26 @@ public class AugmentedSystemMatrix {
     }
 
     public void swapRows(int rowA, int rowB) {
-        throw new UnsupportedOperationException();
+        double[] doubles = Arrays.copyOf(matrix[rowA], fullWidth());
+        System.arraycopy(matrix[rowB], 0, matrix[rowA], 0, fullWidth());
+        System.arraycopy(doubles, 0, matrix[rowB], 0, fullWidth());
     }
 
     public void swapColumns(int columnA, int columnB) {
-        throw new UnsupportedOperationException();
+        double[] doubles = new double[height()];
+        for (int i = 0; i < height(); i++) {
+            doubles[i] = matrix[i][columnA];
+        }
+        for (int i = 0; i < height(); i++) {
+            matrix[i][columnA] = matrix[i][columnB];
+        }
+        for (int i = 0; i < height(); i++) {
+            matrix[i][columnB] = doubles[i];
+        }
+    }
+
+    public int height() {
+        return matrix.length;
     }
 
     private abstract class Row {
